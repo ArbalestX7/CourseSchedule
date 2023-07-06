@@ -56,6 +56,7 @@
         android:contentDescription="@string/start_time"
         android:onClick="showTimePicker"
         android:src="@drawable/ic_time"
+        android:tag="@string/tagStart_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,6 +83,7 @@
         android:contentDescription="@string/end_time"
         android:onClick="showTimePicker"
         android:src="@drawable/ic_time"
+        android:tag="@string/tagEnd_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tv_start_time"
@@ -146,6 +148,24 @@
             android:gravity="top"
             android:maxLines="4" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_start_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_start_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_start_time"
+        tools:text="@string/start_time" />
+
+    <TextView
+        android:id="@+id/tv_end_course"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_end_time"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end_time"
+        tools:text="@string/end_time" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

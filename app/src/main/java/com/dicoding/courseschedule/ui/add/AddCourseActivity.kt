@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -20,9 +21,6 @@ import java.util.*
 
 class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeListener {
 
-    private var spinnerValue: Int = 0
-    private var startTime: String = ""
-    private var endTime: String = ""
     private lateinit var viewModel: AddCourseViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,28 +67,28 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
         val courseName = findViewById<TextInputEditText>(R.id.ed_course_name).text.toString()
         val lecturer = findViewById<TextInputEditText>(R.id.ed_lecturer).text.toString()
         val note = findViewById<TextInputEditText>(R.id.ed_note).text.toString()
+        val start = findViewById<ImageButton>(R.id.ib_start_time).toString()
+        val end = findViewById<ImageButton>(R.id.ib_end_time).toString()
+        val day: Spinner = findViewById(R.id.spinner_day)
+        val dayvm = day.selectedItemPosition.toString().toInt()
 
         viewModel.insertCourse(
             courseName = courseName,
             lecturer = lecturer,
             note = note,
-            day = spinnerValue,
-            startTime = startTime,
-            endTime = endTime,
+            day = dayvm,
+            startTime = start,
+            endTime = end,
         )
-        Log.d("insertCourse: name", courseName)
-        Log.d("insertCourse: lecture", lecturer)
-        Log.d("insertCourse: note", note)
-        Log.d("insertCourse: day", spinnerValue.toString())
-        Log.d("insertCourse: start", startTime)
-        Log.d("insertCourse: end", endTime)
+        Log.d("insertCourse: course:", courseName)
+        Log.d("insertCourse: lecture:",lecturer)
+        Log.d("insertCourse: note:",note)
+        Log.d("insertCourse: day:",dayvm.toString())
+        Log.d("insertCourse: start:",start)
+        Log.d("insertCourse: end:",end)
     }
 
-    fun spinnerDialog() {
-        val daySpinner: Spinner = findViewById(R.id.spinner_day)
-        daySpinner.selectedItemPosition
-        spinnerValue = daySpinner.selectedItemPosition
-    }
+
 
     fun showTimePicker(view: View) {
         val dialog = TimePickerFragment()
@@ -105,12 +103,10 @@ class AddCourseActivity : AppCompatActivity(), TimePickerFragment.DialogTimeList
 
         when(tag) {
             "startTimePicker" -> {
-                findViewById<TextView>(R.id.tv_start_time).text = dateFormat.format(calendar.time)
-                startTime = calendar.time.toString()
+                findViewById<TextView>(R.id.tv_start_course).setText(dateFormat.format(calendar.timeInMillis))
             }
             "endTimePicker" -> {
                 findViewById<TextView>(R.id.tv_end_time).text = dateFormat.format(calendar.time)
-                endTime = calendar.time.toString()
             }
         }
     }
